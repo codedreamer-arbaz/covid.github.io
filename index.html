@@ -4,6 +4,7 @@
     <title>Document</title>
     <?php  include 'links.php'; ?>
     <?php include 'style.php'; ?>
+    <link rel="stylesheet" type="text/html" href="style.css">
 </head>
 <body onload="fetch()">
 <nav class="navbar navbar-expand-lg nav_style p-3">
@@ -303,39 +304,3 @@ document.documentElement.scrollTop=0; //for chrome, Firefox and, IE
 </script>
 </body>
 </html>
-
-<?php
-
-include 'dbcon.php';
-
-if(isset($_POST['submit'])){
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $mobile = $_POST['mobile'];
-    $symp = $_POST['coronasym'];
-    $msg = $_POST['msg'];
-
-    $chk = "";
-    foreach($symp as $chk1){
-        $chk .= $chk1.",";
-    }
-    $insertquery = " insert into coronacase(username, email, mobile, symp, message) values('$username','$email','$mobile','$chk','$msg')";
-    $query = mysqli_query($con, $insertquery);
-
-    if($query){
-        ?>
-        <script>
-            alert("inserted successfully");
-        </script>
-        <?php
-    }else{
-        ?>
-        <script>
-            alert("Not inserted");
-        </script>
-        <?php
-    }
-
-}
-
-?>
